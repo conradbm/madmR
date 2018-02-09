@@ -1,0 +1,17 @@
+Package: madmR
+Title: Multi-Attribute Decision Making for R
+Version: 0.0.0.1000
+Authors@R: person("Blake", "Conrad", email = "bmc.cs@outlook.com", role = c("aut", "cre"))
+Description: A highly robust tool for decision analysts to obtain quick and meaningful results on any raw decision matrix. 
+Depends: R (>= 3.4.1)
+Imports:
+    ggplot2 (>= 2.2.1),
+License: MIT
+URL: https://github.com/conradbm/madm/wiki, https://github.com/conradbm/madm/tree/master/madmr
+BugReports: https://github.com/conradbm/madm/issues
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
