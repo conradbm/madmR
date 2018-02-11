@@ -2,7 +2,7 @@
 <h3> <em>A highly robust tool for decision analysts to obtain quick and meaningful results on any raw decision matrix. </em></h3> 
 
 <h2>How to install</h2>
-<p>The easiest way to install `madmR` is through R the `devtools` package in R: </p>
+<p>The easiest way to install <code>madmR</code> is through R the <code>devtools</code> package in R: </p>
 <code>devtools::install_github("conradbm/madmR", upgrade_dependencies = FALSE)</code><br><br>
 <p>Installation directly through `CRAN` can be done in the traditional manner: </p>
 <code>install.packages('madmR')</code><br>
