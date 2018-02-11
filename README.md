@@ -4,7 +4,7 @@
 <h2>How to install</h2>
 <p>The easiest way to install <code>madmR</code> is through R the <code>devtools</code> package in R: </p>
 <code>devtools::install_github("conradbm/madmR", upgrade_dependencies = FALSE)</code><br><br>
-<p>Installation directly through `CRAN` can be done in the traditional manner: </p>
+<p>Installation directly through <code>CRAN</code> can be done in the traditional manner: </p>
 <code>install.packages('madmR')</code><br>
 <code>library(madmR)</code>
 <h2> Core functionality </h2>
