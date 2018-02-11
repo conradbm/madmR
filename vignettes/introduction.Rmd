@@ -17,18 +17,23 @@ vignette: >
   <li>MAUT(...)</li>
   <li>sensitivity(...)</li>
 </ul>
+```{r}
+library(devtools)
+devtools::install_github('conradbm/madmR', force=TRUE)
+library(madmR)
+```
 
 ## Reading in data matrices
 The general format for any decision matrix is N rows by D columns. Decision analysts almost always exempt row 1 as the row to enforce attribute weighting, so this is also enforced in  read.data.matrix() function. Additionally, enforcing columns as benefits or costs is paramount in decision analysis, so this is also brutally enforced in the read function; I.e., any attributes which do not contain the word 'cost' in them will be treated as benefit.
 ```{r}
-maut_dm   <- read.data.matrix("Data/maut_validate_benefits.csv", header=TRUE)
-topsis_dm <- read.data.matrix("Data/topsis_validate_benefits.csv", header=TRUE)
+#maut_dm   <- read.data.matrix("Data/maut_validate_benefits.csv", header=TRUE)
+#topsis_dm <- read.data.matrix("Data/topsis_validate_benefits.csv", header=TRUE)
 ```
 
 ## These data are already pre-loaded with the package for testing and examples
 ```{r}
-maut_dm <- data(maut_dm)
-topsis_dm <- data(topsis_dm)
+data(maut_dm)
+data(topsis_dm)
 ```
 
 ## A simple TOPSIS example
