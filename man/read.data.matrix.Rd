@@ -20,50 +20,50 @@ This function allows you to import a csv into the correct data.matrix format for
 \examples{
 read.data.matrix("C:/Desktop")
 
-Convert a standard import of:
+## Convert a standard import of:
 
-        name      x1  x2  x3Cost
-1       weight    0.2 0.2 0.6
-2 alternative1    0.5 0.5 0.5
-3 alternative2    0.5 0.5 0.5
-4 alternative3    0.5 0.5 0.5
+#         name      x1  x2  x3Cost
+# 1       weight    0.2 0.2 0.6
+# 2 alternative1    0.5 0.5 0.5
+# 3 alternative2    0.5 0.5 0.5
+# 4 alternative3    0.5 0.5 0.5
 
-OR
+# OR
+# 
+#         name      x1  x2  x3
+#         benefit   +   +    -
+# 1       weight    0.2 0.2 0.6
+# 2 alternative1    0.5 0.5 0.5
+# 3 alternative2    0.5 0.5 0.5
+# 4 alternative3    0.5 0.5 0.5
 
-        name      x1  x2  x3
-        benefit   +   +    -
-1       weight    0.2 0.2 0.6
-2 alternative1    0.5 0.5 0.5
-3 alternative2    0.5 0.5 0.5
-4 alternative3    0.5 0.5 0.5
 
+# into (with rownames instead of a rownames column):
 
-into (with rownames instead of a rownames column):
+#               x1  x2  x3Cost
+# weight       0.2 0.2 0.6
+# alternative1 0.5 0.5 0.5
+# alternative2 0.5 0.5 0.5
+# alternative3 0.5 0.5 0.5
 
-              x1  x2  x3Cost
-weight       0.2 0.2 0.6
-alternative1 0.5 0.5 0.5
-alternative2 0.5 0.5 0.5
-alternative3 0.5 0.5 0.5
+# OR
 
-OR
+#                    x1  x2  x3
+#        benefit     +   +    -
+# 1       weight    0.2 0.2 0.6
+# 2 alternative1    0.5 0.5 0.5
+# 3 alternative2    0.5 0.5 0.5
+# 4 alternative3    0.5 0.5 0.5
+# Standard Decision Matrix Format (N+1)xD:
 
-                   x1  x2  x3
-       benefit     +   +    -
-1       weight    0.2 0.2 0.6
-2 alternative1    0.5 0.5 0.5
-3 alternative2    0.5 0.5 0.5
-4 alternative3    0.5 0.5 0.5
-Standard Decision Matrix Format (N+1)xD:
-
-              attribute1 attribute2 ... attributei ... attributeD
-weight     
-alternative1
-alternative2
-.
-.
-.
-alternativeN
+#               attribute1 attribute2 ... attributei ... attributeD
+# weight     
+# alternative1
+# alternative2
+# .
+# .
+# .
+# alternativeN
 
 
 }

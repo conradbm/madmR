@@ -18,8 +18,7 @@ vignette: >
   <li>sensitivity(...)</li>
 </ul>
 ```{r}
-library(devtools)
-devtools::install_github('conradbm/madmR', force=TRUE)
+library(ggplot2)
 library(madmR)
 ```
 
@@ -84,8 +83,10 @@ FinalDB <- sensitivity(data=topsis_dm,
                                                             "linear")))
                        )
 FinalDB$Plot
+```
 
 # Specific attributes, specific step size, algorithm specific parameters
+```{r}
 FinalDB <- sensitivity(data=maut_dm,
                        attr=c("Sq.Foot","Preference"),
                        step=0.01,
@@ -94,13 +95,16 @@ FinalDB <- sensitivity(data=maut_dm,
                                                             "exponential")))
                        )
 FinalDB$Plot
+```
 
 # Single attribute, specific step size, specific algorithms, specific window to study that attribute on.
+```{r}
 FinalDB <- sensitivity(data=maut_dm,
                        attr="Sq.Foot",
-                       alg=c("TOPSIS", "MAUT"),
+                       algs=c("TOPSIS", "MAUT"),
                        step=0.01,
                        window=c(0.1,0.5)
                        )
 FinalDB$Plot
 ```
+

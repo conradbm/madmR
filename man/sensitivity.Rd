@@ -11,6 +11,8 @@ sensitivity(data = c(), algs = c("TOPSIS", "MAUT"), algParams = c(),
 \arguments{
 \item{data, }{read.data.matrix(data.frame), data.frame in data matrix format.}
 
+\item{algs, }{vector to specify the algorithms with which to use,}
+
 \item{algParams, }{list of named vectors,}
 
 \item{step, }{automatically set to 0.01 is the steps you want an attribute to climb up or down.}
@@ -53,6 +55,36 @@ overarching decision.
 }
 \details{
 Import libraries
+}
+\examples{
+
+## load up some test data
+data(maut_dm)
+data(topsis_dm)
+
+## Get a baseline for ranking
+TOPSIS(maut_dm)$Results
+MAUT(maut_dm)$Results
+
+## Run Sensitivity (I.e., step defaults, algs defaults, algParams defaults, attr defaults. All of which can be tweaked.)
+FinalDB <- sensitivity(data=maut_dm)
+FinalDB$Results          # Output from all the runs
+FinalDB$EdgeCasesResults # Show all of the cases in Final_DB$Results when rank changed
+FinalDB$Plot
+
+
+## Take another look at sensitivity results
+FinalDB <- sensitivity(data=topsis_dm,
+                       step=0.1,
+                       algs=c("TOPSIS","MAUT"),
+                       algParams=list(MAUT=list(scales=list("linear",
+                                                            "linear",
+                                                            "linear",
+                                                            "exponential",
+                                                            "exponential",
+                                                            "exponential",
+                                                            "linear"))))
+FinalDB$Plot
 }
 \author{
 Blake Conrad

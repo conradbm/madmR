@@ -37,7 +37,7 @@
 #' 0.1/(3-1) to give us 0.1/2==0.05, therefore attribuet1 and attribute2 will increase by 0.05 when attribute2 goes down 0.1.
 #' The generalization to this is step/(1-N) in the algorithm. 
 #' @param verbose, default to FALSE. As with most linux command line applications, this will give you a highly detailed picture of what type of iterations are taking place under the hood.
-#' @param algs,vector,
+#' @param algs, vector to specify the algorithms with which to use,
 #' @param algParams, list of named vectors,
 #' @param splitPercentages,matrix of size n-1 by n-1, for each attr how to weigh every other attr from the inc/dec in step. each row should sum to 1.
 #' @param window, double or vector or list, a sigle value represents how low to go for a weight on an attribute being studied, i.e weight-window. likewise for how high, weight+window. for the vector
