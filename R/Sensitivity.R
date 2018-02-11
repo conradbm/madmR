@@ -43,6 +43,36 @@
 #' @param window, double or vector or list, a sigle value represents how low to go for a weight on an attribute being studied, i.e weight-window. likewise for how high, weight+window. for the vector
 #' and list situation it is nothing more than a substitute for the lower and upper bound of default, i.e., (step, 1-step)
 #' @return named list
+#' 
+#' @examples 
+#' 
+#' ## load up some test data
+#' data(maut_dm)
+#' data(topsis_dm)
+#' 
+#' ## Get a baseline for ranking
+#' TOPSIS(maut_dm)$Results
+#' MAUT(maut_dm)$Results
+#' 
+#' ## Run Sensitivity (I.e., step defaults, algs defaults, algParams defaults, attr defaults. All of which can be tweaked.)
+#' FinalDB <- sensitivity(data=maut_dm)
+#' FinalDB$Results          # Output from all the runs
+#' FinalDB$EdgeCasesResults # Show all of the cases in Final_DB$Results when rank changed
+#' FinalDB$Plot
+#' 
+#' 
+#' ## Take another look at sensitivity results
+#' FinalDB <- sensitivity(data=topsis_dm,
+#'                        step=0.1,
+#'                        algs=c("TOPSIS","MAUT"),
+#'                        algParams=list(MAUT=list(scales=list("linear",
+#'                                                             "linear",
+#'                                                             "linear",
+#'                                                             "exponential",
+#'                                                             "exponential",
+#'                                                             "exponential",
+#'                                                             "linear"))))
+#' FinalDB$Plot
 #' @export
 
 sensitivity <- function(data=c(), 
@@ -103,6 +133,7 @@ sensitivity <- function(data=c(),
   DB_Edges <- DB_Final[DB_Final$reportOut==TRUE,][,c((ncol(DM)+1):ncol(DB_Final))]
   
   # Customized plot
+  DB_Edges$ranks <- as.factor(DB_Edges$ranks)
   plt <- ggplot(data=DB_Edges,
                 aes(x=alts, y=weight, color=ranks)) 
   plt <- plt + theme_bw()
