@@ -134,24 +134,31 @@ sensitivity <- function(data=c(),
   
   # Customized plot
   DB_Edges$ranks <- as.factor(DB_Edges$ranks)
-  plt <- ggplot(data=DB_Edges,
-                aes(x=alts, y=weight, color=ranks)) 
-  plt <- plt + theme_bw()
-  plt <- plt + geom_point()
-  plt <- plt + facet_wrap(~alg+attr_i) 
-  plt <- plt + theme(axis.text.x = element_text(angle = 45, hjust = 1))
-  plt <- plt + theme(axis.text.y = element_text(angle = 25))
-  plt <- plt + scale_y_continuous(breaks = round(seq(min(DB_Edges$weight), 1, by = step),1))
-  if(plotLabels) plt <- plt + geom_label(aes(label= round(weight,2)), show.legend = FALSE)
-  plt <- plt + ggtitle("Sensitivity Analysis") + xlab("Alternative") + ylab("Weight")
-  plt <- plt + theme(plot.title = element_text(color="#666666", 
-                                               face="bold",
-                                               size=32, 
-                                               hjust=0)) 
-  plt <- plt + theme(axis.title = element_text(color="#666666",
-                                               size=22)) 
-  plt <- plt + theme(axis.title.x = element_text(face="bold"),
-                     axis.title.y = element_text(face="bold"))
+  
+  if(nrow(DB_Edges) != 0)
+  {
+    plt <- ggplot(data=DB_Edges,
+                  aes(x=alts, y=weight, color=ranks)) 
+    plt <- plt + theme_bw()
+    plt <- plt + geom_point()
+    plt <- plt + facet_wrap(~alg+attr_i) 
+    plt <- plt + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    plt <- plt + theme(axis.text.y = element_text(angle = 25))
+    plt <- plt + scale_y_continuous(breaks = round(seq(min(DB_Edges$weight), 1, by = step),1))
+    if(plotLabels) plt <- plt + geom_label(aes(label= round(weight,2)), show.legend = FALSE)
+    plt <- plt + ggtitle("Sensitivity Analysis") + xlab("Alternative") + ylab("Weight")
+    plt <- plt + theme(plot.title = element_text(color="#666666", 
+                                                 face="bold",
+                                                 size=32, 
+                                                 hjust=0)) 
+    plt <- plt + theme(axis.title = element_text(color="#666666",
+                                                 size=22)) 
+    plt <- plt + theme(axis.title.x = element_text(face="bold"),
+                       axis.title.y = element_text(face="bold"))
+  }
+  else{
+    cat("Sensitivity results: No change in weight will result in a change in rank between alternatives.\n")
+  }
   
   # Concise list to capture important elements of analysis
   retList = list(Results=DB_Final,
