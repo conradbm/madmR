@@ -22,7 +22,7 @@
 #' runs and determine what fidelity the sensitivty is needed to make an impact on the 
 #' overarching decision. 
 #' @title sensitivity
-#' @author Blake Conrad
+#' @author Blake Conrad \email{bmc.cs@outlook.com}
 #' @param data, read.data.matrix(data.frame), data.frame in data matrix format.
 #' @param step, automatically set to 0.01 is the steps you want an attribute to climb up or down.
 #' @param attr, automatically set to c() will trigger a full sensitivity accross all attributes.
