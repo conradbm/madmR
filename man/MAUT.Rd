@@ -36,11 +36,13 @@ alternative2
 alternativeN
 }
 \examples{
-MAUT(read.data.matrix("file.csv"), scales=c()) #all linear scales
-MAUT(read.data.matrix("file.csv"), scales=c("linear", "exponential", "logarithmic"))
+data(maut_dm)
+maut_results <- MAUT(maut_dm) #no scales specified
+maut_results2 <- MAUT(maut_dm, scales=c("linear", "exponential", "logarithmic")) # all scales specified
+maut_results3 <- MAUT(maut_dm, scales=c("exponential", "", "logarithmic")) # some scales specified, all others default to linear.
 }
 \author{
-Blake Conrad
+Blake Conrad \email{bmc.cs@outlook.com}
 }
 \keyword{data.frame,}
 \keyword{ranking}

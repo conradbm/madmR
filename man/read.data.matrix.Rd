@@ -18,7 +18,10 @@ data.matrix format of a data.frame
 This function allows you to import a csv into the correct data.matrix format for the madm package
 }
 \examples{
-read.data.matrix("C:/Desktop")
+
+#IMPORTANT: 1. Abide the shape specifications listed below. 2. Make sure cost attributes have cost in their name. Make sure the weight column is explicitely labeled, 'weight'
+
+#read.data.matrix("C:/Desktop/your.csv")
 
 ## Convert a standard import of:
 

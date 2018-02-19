@@ -16,13 +16,16 @@ list
 A function to perform the TOPSIS algorithm on a data.frame in read.data.matrix format
 }
 \details{
-More theory on the following: https://github.com/conradbm/madm/blob/master/Examples/SAW_and_Topsis.xls
+More theory on the following:
+https://github.com/conradbm/madm/blob/master/Examples/SAW_and_Topsis.xls
 }
 \examples{
-TOPSIS(read.data.matri("file.csv"))
+data(topsis_dm)
+topsis_results <- TOPSIS(topsis_dm)
+topsis_results$Results
 }
 \author{
-Blake Conrad
+Blake Conrad \email{bmc.cs@outlook.com}
 }
 \keyword{data.frame,}
 \keyword{ranking}

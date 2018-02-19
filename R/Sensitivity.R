@@ -42,6 +42,7 @@
 #' @param splitPercentages,matrix of size n-1 by n-1, for each attr how to weigh every other attr from the inc/dec in step. each row should sum to 1.
 #' @param window, double or vector or list, a sigle value represents how low to go for a weight on an attribute being studied, i.e weight-window. likewise for how high, weight+window. for the vector
 #' and list situation it is nothing more than a substitute for the lower and upper bound of default, i.e., (step, 1-step)
+#' @import ggplot2
 #' @return named list
 #' 
 #' @examples 
