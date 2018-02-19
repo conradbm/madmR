@@ -2,7 +2,7 @@ Type: Package
 Package: madmR
 Title: Multi-Attribute Decision Making for R
 Version: 1.0.0.0
-Authors@R: person("Blake", "Conrad", "bmc.cs@outlook.com", role=c("aut","cre”))
+Authors@R: person("Blake", "Conrad", "bmc.cs@outlook.com", role=c("aut","cre"))
 Author: Blake Conrad [aut, cre]
 Maintainer: Blake Conrad <bmc.cs@outlook.com>
 Description: A highly robust tool for decision analysts to obtain quick and meaningful results on any raw decision matrix. 
