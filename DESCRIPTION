@@ -4,9 +4,10 @@ Title: Multi-Attribute Decision Making for R
 Version: 0.0.0.1000
 Authors@R: person("Blake", "Conrad", , "bmc.cs@outlook.com", c("aut", "cre"))
 Description: A highly robust tool for decision analysts to obtain quick and meaningful results on any raw decision matrix. 
-Depends: R (>= 3.2.4)
+Depends: 
+    R (>= 3.2.4)
 Imports:
-    ggplot2 (>= 2.2.1),
+    ggplot2 (>= 2.2.1)
 License: MIT
 URL: https://github.com/conradbm/madm/wiki, https://github.com/conradbm/madmR
 BugReports: https://github.com/conradbm/madmR/issues
