@@ -8,7 +8,7 @@
 <code>install.packages('madmR')</code><br>
 <code>library(madmR)</code>
 <h2> Core functionality </h2>
-<p>Version <code>0.0.0.1000</code></p>
+<p>Version <code>1.0.0.0</code></p>
 <ul> 
 <li>Technique for Order of Preference by Similarity to Ideal Solution (<strong>TOPSIS</strong>)</li>
 <li>Multi-Attribute Utility Theory (<strong>MAUT</strong>)
