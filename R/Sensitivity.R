@@ -123,7 +123,7 @@ sensitivity <- function(data=c(),
   else{
     cat("Custom splits were decided at: ", splitPercentages, "\n")
     cat("Non-uniform split percentages is not yet supported in this package. Try a later version for this functionality.\n")
-    DB_Final <- custom_sensitivity(DM, DB, algs, algParams, step, attr, splitPercentages, verbose)
+    #DB_Final <- custom_sensitivity(DM, DB, algs, algParams, step, attr, splitPercentages, verbose)
     # same as default just when increase/decreaseAttribute is called scale by the row in splitPerc that attr_i is in names(dm)
   }
 
