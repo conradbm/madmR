@@ -2,15 +2,15 @@ Type: Package
 Package: madmR
 Title: Multi-Attribute Decision Making for R
 Version: 1.0.0.0
-Authors@R: person("Blake", "Conrad", "bmc.cs@outlook.com", role=c("aut","cre"))
-Author: Blake Conrad [aut, cre]
+Authors@R: person("Blake", "Conrad", email="bmc.cs@outlook.com", role=c("aut","cre"))
+Author: Blake Conrad
 Maintainer: Blake Conrad <bmc.cs@outlook.com>
 Description: A highly robust tool for decision analysts to obtain quick and meaningful results on any raw decision matrix. 
 Depends: 
     R (>= 3.2.4)
 Imports:
     ggplot2 (>= 2.2.1)
-License: MIT
+License: MIT + LICENSE
 URL: https://github.com/conradbm/madm/wiki, https://github.com/conradbm/madmR
 BugReports: https://github.com/conradbm/madmR/issues
 Encoding: UTF-8

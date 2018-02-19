@@ -2,24 +2,27 @@
 % Please edit documentation in R/Sensitivity.R
 \name{increaseAttribute}
 \alias{increaseAttribute}
-\title{Helper function for the default_sensitivity(...) and custom_sensitivity(...) function
- Blake Conrad
- DMCopyj, read.data.matrix(data.frame) -- data.frame in data matrix format.
- attr, charater -- a single specified attribute within DMCopyj
- step, double -- is the steps you want an attribute that is being increased
-split_step, double -- give a number of attributes in a decision matrix the formula for this is: step/(1-N), this is meant to be 
-decrementally added to an attributes weight during the sensitivity database building phase.
- DMCopyj, read.data.matrix(data.frame) -- data.frame in data matrix format. This is an updated version of the input DMCopyj which has adjusted weights now from the decrease in step and addition from split_step.}
+\title{increaseAttribute}
 \usage{
 increaseAttribute(DMCopyk, attr_k, step, split_step)
 }
-\description{
-Helper function for the default_sensitivity(...) and custom_sensitivity(...) function
- Blake Conrad
- DMCopyj, read.data.matrix(data.frame) -- data.frame in data matrix format.
- attr, charater -- a single specified attribute within DMCopyj
- step, double -- is the steps you want an attribute that is being increased
-split_step, double -- give a number of attributes in a decision matrix the formula for this is: step/(1-N), this is meant to be 
-decrementally added to an attributes weight during the sensitivity database building phase.
- DMCopyj, read.data.matrix(data.frame) -- data.frame in data matrix format. This is an updated version of the input DMCopyj which has adjusted weights now from the decrease in step and addition from split_step.
+\arguments{
+\item{DMCopyk, }{the original decision matrix}
+
+\item{attr_k, }{specified attribute being examined.}
+
+\item{step, }{incremental step size}
+
+\item{split_step, }{how much to take away from other attributes as we increase this one}
 }
+\value{
+data.frame
+}
+\description{
+Helper function to sensitivity analysis
+}
+\author{
+Blake Conrad \email{bmc.cs@outlook.com}
+}
+\keyword{data.frame,}
+\keyword{ranking}

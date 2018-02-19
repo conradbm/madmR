@@ -2,24 +2,27 @@
 % Please edit documentation in R/Sensitivity.R
 \name{decreaseAttribute}
 \alias{decreaseAttribute}
-\title{helper function to decrease a single attribute and proportionally increase every other.
- Blake Conrad
-DMCopyj, read.data.matrix(data.frame), data.frame in data matrix format.
- attr_j, charater, a single specified attribute within DMCopyj
- step, double, is the steps you want an attribute that is being decreased.
- split_step, double, give a number of attributes in a decision matrix the formula for this is: step/(1-N), this is meant to be 
-incrementally added to an attributes weight during the sensitivity database building phase.
- DMCopyj, read.data.matrix(data.frame), This is an updated version of the input DMCopyj which has adjusted weights now from the decrease in step and addition from split_step.}
+\title{decreaseAttribute}
 \usage{
 decreaseAttribute(DMCopyj, attr_j, step, split_step)
 }
-\description{
-helper function to decrease a single attribute and proportionally increase every other.
- Blake Conrad
-DMCopyj, read.data.matrix(data.frame), data.frame in data matrix format.
- attr_j, charater, a single specified attribute within DMCopyj
- step, double, is the steps you want an attribute that is being decreased.
- split_step, double, give a number of attributes in a decision matrix the formula for this is: step/(1-N), this is meant to be 
-incrementally added to an attributes weight during the sensitivity database building phase.
- DMCopyj, read.data.matrix(data.frame), This is an updated version of the input DMCopyj which has adjusted weights now from the decrease in step and addition from split_step.
+\arguments{
+\item{DMCopyj, }{the original decision matrix}
+
+\item{attr_j, }{specified attribute being examined.}
+
+\item{step, }{incremental step size}
+
+\item{split_step, }{how much to add too other attributes as we increase this one}
 }
+\value{
+data.frame
+}
+\description{
+Helper function to sensitivity analysis
+}
+\author{
+Blake Conrad \email{bmc.cs@outlook.com}
+}
+\keyword{data.frame,}
+\keyword{ranking}

@@ -10,7 +10,7 @@ vignette: >
 ---
 
 
-## Core Functions
+<h2>Core Functionality</h2>
 <ul>
   <li>read.data.matrix(..)</li>
   <li>TOPSIS(...)</li>
@@ -22,53 +22,53 @@ library(ggplot2)
 library(madmR)
 ```
 
-## Reading in data matrices
-The general format for any decision matrix is N rows by D columns. Decision analysts almost always exempt row 1 as the row to enforce attribute weighting, so this is also enforced in  read.data.matrix() function. Additionally, enforcing columns as benefits or costs is paramount in decision analysis, so this is also brutally enforced in the read function; I.e., any attributes which do not contain the word 'cost' in them will be treated as benefit.
+<h2> Reading in data matrices </h2>
+<p>The general format for any decision matrix is N rows by D columns. Decision analysts almost always exempt row 1 as the row to enforce attribute weighting, so this is also enforced in  read.data.matrix() function. Additionally, enforcing columns as benefits or costs is paramount in decision analysis, so this is also brutally enforced in the read function; I.e., any attributes which do not contain the word 'cost' in them will be treated as benefit.</p>
 ```{r}
 #maut_dm   <- read.data.matrix("Data/maut_validate_benefits.csv", header=TRUE)
 #topsis_dm <- read.data.matrix("Data/topsis_validate_benefits.csv", header=TRUE)
 ```
 
-## These data are already pre-loaded with the package for testing and examples
+<h2> Read in data </h2>
 ```{r}
 data(maut_dm)
 data(topsis_dm)
 ```
 
-## A simple TOPSIS example
+<h2> Run TOPSIS </h2>
 ```{r}
 topsisResults <- TOPSIS(topsis_dm) #version 0.0.0.1000 has no additional parameters
 topsisResults$Results
 ```
 
-## A simple MAUT example
+<h2> Run MAUT </h2>
 ```{r}
 mautResults <- MAUT(maut_dm)
 mautResults$Results
 ```
 
-## A simple sensitivity example
-Since we know there are no additional parameters for the topsis function, we can run it without concerning ourselves with the algParams. This will only be applicable to the MAUT algorithm.
+<h2> Examine sensitivity data </h2>
+<p> Since we know there are no additional parameters for the topsis function, we can run it without concerning ourselves with the algParams. This will only be applicable to the MAUT algorithm. </p>
 ```{r}
 FinalDB <- sensitivity(data=maut_dm)
 FinalDB$Results          # Output from all the runs
-FinalDB$EdgeCasesResults # Show all of the cases in Final_DB$Results which rank changed
+head(FinalDB$EdgeCasesResults) # Show all of the cases in Final_DB$Results which rank changed
 ```
 
-## More Examples
-TOPSIS
+<h2> More examples </h2> 
+<p> TOPSIS </p>
 ```{r}
 dm <- TOPSIS(topsis_dm)
-dm
+head(dm)
 ```
-MAUT
+<p> MAUT </p>
 ```{r}
 dm <- MAUT(maut_dm, 
            scales=c("linear","linear","exponential") #default to all linear
            )
-dm
+head(dm)
 ```
-Sensitivity
+<p> Sensitivity </p>
 ```{r, fig.show='hold'}
 # All attributes, specific step size, only 1 algorithm, algorithm specified parameters
 FinalDB <- sensitivity(data=topsis_dm,
@@ -85,7 +85,7 @@ FinalDB <- sensitivity(data=topsis_dm,
 FinalDB$Plot
 ```
 
-# Specific attributes, specific step size, algorithm specific parameters
+<p> Specific attributes, specific step size, algorithm specific parameters </p>
 ```{r}
 FinalDB <- sensitivity(data=maut_dm,
                        attr=c("Sq.Foot","Preference"),
@@ -97,7 +97,7 @@ FinalDB <- sensitivity(data=maut_dm,
 FinalDB$Plot
 ```
 
-# Single attribute, specific step size, specific algorithms, specific window to study that attribute on.
+<p> Single attribute, specific step size, specific algorithms, specific window to study that attribute on. </p>
 ```{r}
 FinalDB <- sensitivity(data=maut_dm,
                        attr="Sq.Foot",

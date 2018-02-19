@@ -11,9 +11,9 @@
 
 
 
-#' @description A function to perform the sensitivity on a data.frame in read.data.matrix format.
+#' @description A function to perform the sensitivity on a data.frame in read data matrix format.
 #' The spirit behind this function is to interpretively take in the given parameters
-#' of a specified read.data.matrix style data.frame and populate a database.
+#' of a specified read data matrix style data.frame and populate a database.
 #' From this database, the user can pivot, plot, and reshape for appropriate analysis
 #' in deciding what different weighting schemes might have looked like for the decision maker.
 #' This function is meant to scale between various methods as well as attributes.
@@ -23,7 +23,7 @@
 #' overarching decision. 
 #' @title sensitivity
 #' @author Blake Conrad \email{bmc.cs@outlook.com}
-#' @param data, read.data.matrix(data.frame), data.frame in data matrix format.
+#' @param data, read data matrix(data.frame), data.frame in data matrix format.
 #' @param step, automatically set to 0.01 is the steps you want an attribute to climb up or down.
 #' @param attr, automatically set to c() will trigger a full sensitivity accross all attributes.
 #'  If a list of valid attribuets are provided, the sensitivity will only trigger these attributes
@@ -42,6 +42,8 @@
 #' @param splitPercentages,matrix of size n-1 by n-1, for each attr how to weigh every other attr from the inc/dec in step. each row should sum to 1.
 #' @param window, double or vector or list, a sigle value represents how low to go for a weight on an attribute being studied, i.e weight-window. likewise for how high, weight+window. for the vector
 #' and list situation it is nothing more than a substitute for the lower and upper bound of default, i.e., (step, 1-step)
+#' @param plotLabels, boolean to specify how you would like the ggplot2 object to be returned (points or labels).
+#' @param splitPercentages, currently defaulted to uniform, but will allow the user to define rules to how incremental changes are handled.
 #' @import ggplot2
 #' @return named list
 #' 
@@ -171,17 +173,22 @@ sensitivity <- function(data=c(),
 }
 
 
-#helper function to launch the default mode of sensitivity analysis
-#Blake Conrad
-#dataframe in decision matrix form (See read.data.matrix).
-#current DB housing information.
-#specific attribute(s) that want to be analyzed
-#specific algorithms to be run on this sensitivity
-#specific parameters for each algorithm specified
-#specific incremental flicker between algorithm runs that adjusts weights
-#vocals for better user understanding
-#user specified step size
-#data.frame
+#' @description Helper function to sensitivity analysis
+#' @title default_sensitivty
+#' @author Blake Conrad \email{bmc.cs@outlook.com}
+#' @param data, data.frame in read data matrix format
+#' @param algParams, a list of parameters that the user wishes to customize during sensitivity analysis.
+#' @param DM, the original decision matrix
+#' @param DB, wearhouse to store all of our iterations of data being created.
+#' @param attr, specified attribute(s) to run sensitivty on.
+#' @param algs, specified algorithms to run sensitivity on.
+#' @param algParams, parameters to be passed around to each function in sensitivity
+#' @param step, incremental step size each iteration.
+#' @param verbose, echos print statements to understand input/output relation.
+#' @param window, specified window size vector e.g., c(0,.5) only to allow weights to change between the given window range.
+#' @keywords data.frame, ranking
+#' @return data.frame
+
 default_sensitivity <- function(DM, 
                                 DB,
                                 attr,
@@ -323,15 +330,15 @@ default_sensitivity <- function(DM,
 }#enddefault_sensitivity
 
 
-#'  helper function to decrease a single attribute and proportionally increase every other.
-#'  Blake Conrad
-#' DMCopyj, read.data.matrix(data.frame), data.frame in data matrix format.
-#'  attr_j, charater, a single specified attribute within DMCopyj
-#'  step, double, is the steps you want an attribute that is being decreased.
-#'  split_step, double, give a number of attributes in a decision matrix the formula for this is: step/(1-N), this is meant to be 
-#' incrementally added to an attributes weight during the sensitivity database building phase.
-#'  DMCopyj, read.data.matrix(data.frame), This is an updated version of the input DMCopyj which has adjusted weights now from the decrease in step and addition from split_step.
-
+#' @description Helper function to sensitivity analysis
+#' @title decreaseAttribute
+#' @author Blake Conrad \email{bmc.cs@outlook.com}
+#' @param DMCopyj, the original decision matrix
+#' @param attr_j, specified attribute being examined.
+#' @param step, incremental step size
+#' @param split_step, how much to add too other attributes as we increase this one
+#' @keywords data.frame, ranking
+#' @return data.frame
 decreaseAttribute <- function(DMCopyj,
                               attr_j,
                               step, 
@@ -351,14 +358,15 @@ decreaseAttribute <- function(DMCopyj,
 }
 
 
-#'  Helper function for the default_sensitivity(...) and custom_sensitivity(...) function
-#'  Blake Conrad
-#'  DMCopyj, read.data.matrix(data.frame) -- data.frame in data matrix format.
-#'  attr, charater -- a single specified attribute within DMCopyj
-#'  step, double -- is the steps you want an attribute that is being increased
-#' split_step, double -- give a number of attributes in a decision matrix the formula for this is: step/(1-N), this is meant to be 
-#' decrementally added to an attributes weight during the sensitivity database building phase.
-#'  DMCopyj, read.data.matrix(data.frame) -- data.frame in data matrix format. This is an updated version of the input DMCopyj which has adjusted weights now from the decrease in step and addition from split_step.
+#' @description Helper function to sensitivity analysis
+#' @title increaseAttribute
+#' @author Blake Conrad \email{bmc.cs@outlook.com}
+#' @param DMCopyk, the original decision matrix
+#' @param attr_k, specified attribute being examined.
+#' @param step, incremental step size
+#' @param split_step, how much to take away from other attributes as we increase this one
+#' @keywords data.frame, ranking
+#' @return data.frame
 increaseAttribute <- function(DMCopyk,
                               attr_k,
                               step,
@@ -377,17 +385,19 @@ increaseAttribute <- function(DMCopyk,
   return(DMCopyk)
 }
 
-#'  updates the data table to store new algorithm output information.
-#'  Blake Conrad
-#'  DMCopy, a read.data.matrix style data frame, expected to be brought in from default_sensitivity(...)
-#'  DB, data.frame ,the 'database' or most updated dataframe object that is storing each iterations results. This function will append to it and return it.
-#'  alg, character, specified as 'TOPSIS' or "MAUT' in version 1.0.0
-#' algParams, list, each named item in the list is a specific parameter to the alg param specified.
-#'  attr_i, character, a specific column name in the DMCopy which is being sensitively analyzed.
-#'  iterid, integer, meant to keep track of indices for the DB.
-#'  verbose, boolean, useful if TRUE for debugging.
-#'  data.frame
-#' 
+
+#' @description Helper function to sensitivity analysis
+#' @title updateDB
+#' @author Blake Conrad \email{bmc.cs@outlook.com}
+#' @param DMCopy, the original decision matrix
+#' @param DB, wearhouse to store all of our iterations of data being created.
+#' @param attr_i, specified attribute being examined.
+#' @param algs, specified algorithms to run sensitivity on.
+#' @param algParams, parameters to be passed around to each function in sensitivity
+#' @param verbose, echos print statements to understand input/output relation.
+#' @param iterid, the current unique identifier to this iteration.
+#' @keywords data.frame, ranking
+#' @return data.frame
 updateDB <- function(DMCopy, 
                      DB,
                      alg,
@@ -464,13 +474,31 @@ updateDB <- function(DMCopy,
 
 
 
-
+#' @description Helper function to sensitivity analysis
+#' @title custom_sensitivty
+#' @author Blake Conrad \email{bmc.cs@outlook.com}
+#' @param data, data.frame in read data matrix format
+#' @param algParams, a list of parameters that the user wishes to customize during sensitivity analysis.
+#' @param DM, the original decision matrix
+#' @param DB, wearhouse to store all of our iterations of data being created.
+#' @param attr, specified attribute(s) to run sensitivty on.
+#' @param algs, specified algorithms to run sensitivity on.
+#' @param algParams, parameters to be passed around to each function in sensitivity
+#' @param step, incremental step size each iteration.
+#' @param verbose, echos print statements to understand input/output relation.
+#' @param window, specified window size vector e.g., c(0,.5) only to allow weights to change between the given window range.
+#' @param splitPercentages, a specified range of how each iteration will divey out the incrmented change to the other attributes. This can vary.
+#' @keywords data.frame, ranking
+#' @return data.frame
 custom_sensitivity <- function(DM,
                                DB,
-                               step, 
-                               attr, 
-                               splitPercentages,
-                               verbose){
+                               attr,
+                               algs,
+                               algParams,
+                               step,
+                               verbose,
+                               window,
+                               splitPercentages){
   
   cat("Custom sensitivity beginning.\n")
   cat("Custom sensitivity not yet established ... \n")

@@ -9,7 +9,7 @@ sensitivity(data = c(), algs = c("TOPSIS", "MAUT"), algParams = c(),
   verbose = FALSE, plotLabels = FALSE)
 }
 \arguments{
-\item{data, }{read.data.matrix(data.frame), data.frame in data matrix format.}
+\item{data, }{read data matrix(data.frame), data.frame in data matrix format.}
 
 \item{algs, }{vector to specify the algorithms with which to use,}
 
@@ -33,18 +33,22 @@ The generalization to this is step/(1-N) in the algorithm.}
 
 \item{verbose, }{default to FALSE. As with most linux command line applications, this will give you a highly detailed picture of what type of iterations are taking place under the hood.}
 
+\item{plotLabels, }{boolean to specify how you would like the ggplot2 object to be returned (points or labels).}
+
 \item{splitPercentages, matrix}{of size n-1 by n-1, for each attr how to weigh every other attr from the inc/dec in step. each row should sum to 1.}
 
 \item{window, }{double or vector or list, a sigle value represents how low to go for a weight on an attribute being studied, i.e weight-window. likewise for how high, weight+window. for the vector
 and list situation it is nothing more than a substitute for the lower and upper bound of default, i.e., (step, 1-step)}
+
+\item{splitPercentages, }{currently defaulted to uniform, but will allow the user to define rules to how incremental changes are handled.}
 }
 \value{
 named list
 }
 \description{
-A function to perform the sensitivity on a data.frame in read.data.matrix format.
+A function to perform the sensitivity on a data.frame in read data matrix format.
 The spirit behind this function is to interpretively take in the given parameters
-of a specified read.data.matrix style data.frame and populate a database.
+of a specified read data matrix style data.frame and populate a database.
 From this database, the user can pivot, plot, and reshape for appropriate analysis
 in deciding what different weighting schemes might have looked like for the decision maker.
 This function is meant to scale between various methods as well as attributes.

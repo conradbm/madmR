@@ -2,28 +2,33 @@
 % Please edit documentation in R/Sensitivity.R
 \name{updateDB}
 \alias{updateDB}
-\title{updates the data table to store new algorithm output information.
- Blake Conrad
- DMCopy, a read.data.matrix style data frame, expected to be brought in from default_sensitivity(...)
- DB, data.frame ,the 'database' or most updated dataframe object that is storing each iterations results. This function will append to it and return it.
- alg, character, specified as 'TOPSIS' or "MAUT' in version 1.0.0
-algParams, list, each named item in the list is a specific parameter to the alg param specified.
- attr_i, character, a specific column name in the DMCopy which is being sensitively analyzed.
- iterid, integer, meant to keep track of indices for the DB.
- verbose, boolean, useful if TRUE for debugging.
- data.frame}
+\title{updateDB}
 \usage{
 updateDB(DMCopy, DB, alg, algParams, attr_i, iterid, verbose)
 }
-\description{
-updates the data table to store new algorithm output information.
- Blake Conrad
- DMCopy, a read.data.matrix style data frame, expected to be brought in from default_sensitivity(...)
- DB, data.frame ,the 'database' or most updated dataframe object that is storing each iterations results. This function will append to it and return it.
- alg, character, specified as 'TOPSIS' or "MAUT' in version 1.0.0
-algParams, list, each named item in the list is a specific parameter to the alg param specified.
- attr_i, character, a specific column name in the DMCopy which is being sensitively analyzed.
- iterid, integer, meant to keep track of indices for the DB.
- verbose, boolean, useful if TRUE for debugging.
- data.frame
+\arguments{
+\item{DMCopy, }{the original decision matrix}
+
+\item{DB, }{wearhouse to store all of our iterations of data being created.}
+
+\item{algParams, }{parameters to be passed around to each function in sensitivity}
+
+\item{attr_i, }{specified attribute being examined.}
+
+\item{iterid, }{the current unique identifier to this iteration.}
+
+\item{verbose, }{echos print statements to understand input/output relation.}
+
+\item{algs, }{specified algorithms to run sensitivity on.}
 }
+\value{
+data.frame
+}
+\description{
+Helper function to sensitivity analysis
+}
+\author{
+Blake Conrad \email{bmc.cs@outlook.com}
+}
+\keyword{data.frame,}
+\keyword{ranking}
