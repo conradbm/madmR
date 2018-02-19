@@ -87,5 +87,5 @@ FinalDB <- sensitivity(data=topsis_dm,
 FinalDB$Plot
 }
 \author{
-Blake Conrad
+Blake Conrad \email{bmc.cs@outlook.com}
 }
