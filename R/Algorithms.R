@@ -4,7 +4,9 @@
 #' @description A function to perform the TOPSIS algorithm on a data.frame in read.data.matrix format
 #' @title TOPSIS
 #' @author Blake Conrad \email{bmc.cs@outlook.com}
-#' @param data.frame in read.data.matrix format
+#' @param data, dataframe in read.data.matrix format
+#' @param algParams, default to c(), when the sensitivity function calls this function the user can pass specific algorithm parameters. These have a sanitiy check and then append in the correct parameter if correctly supplied.
+#' @param verbose, echos print statements to understand input/output relation.
 #' @keywords data.frame, ranking
 #' @return list
 #' @examples
@@ -127,16 +129,20 @@ TOPSIS <- function(data=DM, algParams=c(), verbose=FALSE){
 #' @description This function allows you to import a csv into the correct data.matrix format for the madm package
 #' @title MAUT
 #' @author Blake Conrad \email{bmc.cs@outlook.com}
-#' @param read.data.matrix(data.frame), c()
+#' @param data, dataframe in read.data.matrix format
 #' @param scales, default to c(), if scales supplied and supplied correctly, each attribute will get the appropriate scaling measure (linear, exponential, or logarithmic). Defaults to all linear scales if none supplied.
-#' @param algParams, default to c(), when the sensitivity function calls this function the user can pass specific algorithm parameters. These have a sanitiy check and then append in the correct parameter if correctly supplied. 
+#' @param algParams, default to c(), when the sensitivity function calls this function the user can pass specific algorithm parameters. These have a sanitiy check and then append in the correct parameter if correctly supplied.
+#' @param verbose, echos print statements to understand input/output relation.
 #' @keywords data.frame, ranking
 #' @return list
 #' @examples
 #' data(maut_dm)
-#' maut_results <- MAUT(maut_dm) #no scales specified
-#' maut_results2 <- MAUT(maut_dm, scales=c("linear", "exponential", "logarithmic")) # all scales specified
-#' maut_results3 <- MAUT(maut_dm, scales=c("exponential", "", "logarithmic")) # some scales specified, all others default to linear.
+#' #no scales specified
+#' maut_results <- MAUT(maut_dm) 
+#' # all scales specified
+#' maut_results2 <- MAUT(maut_dm, scales=c("linear", "exponential", "logarithmic"))
+#' # some scales specified, all others default to linear. 
+#' maut_results3 <- MAUT(maut_dm, scales=c("exponential", "", "logarithmic")) 
 #' @details
 #'  1. https://github.com/conradbm/madm/blob/master/Examples/MAUT.xls
 #' @details 

@@ -7,11 +7,13 @@
 MAUT(data = DM, algParams = c(), scales = c(), verbose = FALSE)
 }
 \arguments{
+\item{data, }{dataframe in read.data.matrix format}
+
 \item{algParams, }{default to c(), when the sensitivity function calls this function the user can pass specific algorithm parameters. These have a sanitiy check and then append in the correct parameter if correctly supplied.}
 
 \item{scales, }{default to c(), if scales supplied and supplied correctly, each attribute will get the appropriate scaling measure (linear, exponential, or logarithmic). Defaults to all linear scales if none supplied.}
 
-\item{read.data.matrix(data.frame), }{c()}
+\item{verbose, }{echos print statements to understand input/output relation.}
 }
 \value{
 list
@@ -37,9 +39,12 @@ alternativeN
 }
 \examples{
 data(maut_dm)
-maut_results <- MAUT(maut_dm) #no scales specified
-maut_results2 <- MAUT(maut_dm, scales=c("linear", "exponential", "logarithmic")) # all scales specified
-maut_results3 <- MAUT(maut_dm, scales=c("exponential", "", "logarithmic")) # some scales specified, all others default to linear.
+#no scales specified
+maut_results <- MAUT(maut_dm) 
+# all scales specified
+maut_results2 <- MAUT(maut_dm, scales=c("linear", "exponential", "logarithmic"))
+# some scales specified, all others default to linear. 
+maut_results3 <- MAUT(maut_dm, scales=c("exponential", "", "logarithmic")) 
 }
 \author{
 Blake Conrad \email{bmc.cs@outlook.com}

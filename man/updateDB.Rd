@@ -11,6 +11,8 @@ updateDB(DMCopy, DB, alg, algParams, attr_i, iterid, verbose)
 
 \item{DB, }{wearhouse to store all of our iterations of data being created.}
 
+\item{alg, }{specified algorithms to run sensitivity on.}
+
 \item{algParams, }{parameters to be passed around to each function in sensitivity}
 
 \item{attr_i, }{specified attribute being examined.}
@@ -18,8 +20,6 @@ updateDB(DMCopy, DB, alg, algParams, attr_i, iterid, verbose)
 \item{iterid, }{the current unique identifier to this iteration.}
 
 \item{verbose, }{echos print statements to understand input/output relation.}
-
-\item{algs, }{specified algorithms to run sensitivity on.}
 }
 \value{
 data.frame

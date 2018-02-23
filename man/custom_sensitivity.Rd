@@ -16,7 +16,7 @@ custom_sensitivity(DM, DB, attr, algs, algParams, step, verbose, window,
 
 \item{algs, }{specified algorithms to run sensitivity on.}
 
-\item{algParams, }{a list of parameters that the user wishes to customize during sensitivity analysis.}
+\item{algParams, }{parameters to be passed around to each function in sensitivity}
 
 \item{step, }{incremental step size each iteration.}
 
@@ -25,13 +25,9 @@ custom_sensitivity(DM, DB, attr, algs, algParams, step, verbose, window,
 \item{window, }{specified window size vector e.g., c(0,.5) only to allow weights to change between the given window range.}
 
 \item{splitPercentages, }{a specified range of how each iteration will divey out the incrmented change to the other attributes. This can vary.}
-
-\item{data, }{data.frame in read data matrix format}
-
-\item{algParams, }{parameters to be passed around to each function in sensitivity}
 }
 \value{
-data.frame
+list
 }
 \description{
 Helper function to sensitivity analysis

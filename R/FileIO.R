@@ -9,7 +9,10 @@
 #' @return data.matrix format of a data.frame
 #' @examples
 #' 
-#' #IMPORTANT: 1. Abide the shape specifications listed below. 2. Make sure cost attributes have cost in their name. Make sure the weight column is explicitely labeled, 'weight'
+#' # IMPORTANT:
+#' #  1. Abide the shape specifications listed below.
+#' #  2. Make sure cost attributes have cost in their name. 
+#' #  3. Make sure the weight column is explicitely labeled, 'weight'
 #' 
 #' #read.data.matrix("C:/Desktop/your.csv")
 #' 

@@ -28,8 +28,8 @@
 #' @param attr, automatically set to c() will trigger a full sensitivity accross all attributes.
 #'  If a list of valid attribuets are provided, the sensitivity will only trigger these attributes
 #'  in the sensitivity and reflect them only in the returned database.
-#' @param window, double or vector w/ 1 double per attr, specifies how low and high a step size will go for each attribute relative to its 
-#' current weight. if window exceeds 1 attr below0 or above1, the window for that attr will be void and the
+#' @param window, double or vector or list, a sigle value represents how low to go for a weight on an attribute being studied, i.e weight-window. likewise for how high, weight+window. for the vector
+#' and list situation it is nothing more than a substitute for the lower and upper bound of default, i.e., (step, 1-step)
 #'  next will be assessed.
 #' @param splitPercentages, automatically set to uniform. This means as you incrementally increase and
 #' decrease an attributes weight value, the percetnage given to each other attribute is equal. An example would
@@ -39,11 +39,9 @@
 #' @param verbose, default to FALSE. As with most linux command line applications, this will give you a highly detailed picture of what type of iterations are taking place under the hood.
 #' @param algs, vector to specify the algorithms with which to use,
 #' @param algParams, list of named vectors,
-#' @param splitPercentages,matrix of size n-1 by n-1, for each attr how to weigh every other attr from the inc/dec in step. each row should sum to 1.
-#' @param window, double or vector or list, a sigle value represents how low to go for a weight on an attribute being studied, i.e weight-window. likewise for how high, weight+window. for the vector
-#' and list situation it is nothing more than a substitute for the lower and upper bound of default, i.e., (step, 1-step)
+
 #' @param plotLabels, boolean to specify how you would like the ggplot2 object to be returned (points or labels).
-#' @param splitPercentages, currently defaulted to uniform, but will allow the user to define rules to how incremental changes are handled.
+
 #' @import ggplot2
 #' @return named list
 #' 
@@ -57,7 +55,8 @@
 #' TOPSIS(maut_dm)$Results
 #' MAUT(maut_dm)$Results
 #' 
-#' ## Run Sensitivity (I.e., step defaults, algs defaults, algParams defaults, attr defaults. All of which can be tweaked.)
+#' ## Run Sensitivity (I.e., step defaults, algs defaults, algParams defaults, attr 
+#' #                   defaults. All of which can be tweaked.)
 #' FinalDB <- sensitivity(data=maut_dm)
 #' FinalDB$Results          # Output from all the runs
 #' FinalDB$EdgeCasesResults # Show all of the cases in Final_DB$Results when rank changed
@@ -141,14 +140,14 @@ sensitivity <- function(data=c(),
   if(nrow(DB_Edges) != 0)
   {
     plt <- ggplot(data=DB_Edges,
-                  aes(x=alts, y=weight, color=ranks)) 
+                  aes(x=DB_Edges$alts, y=DB_Edges$weight, color=DB_Edges$ranks)) 
     plt <- plt + theme_bw()
     plt <- plt + geom_point()
     plt <- plt + facet_wrap(~alg+attr_i) 
     plt <- plt + theme(axis.text.x = element_text(angle = 45, hjust = 1))
     plt <- plt + theme(axis.text.y = element_text(angle = 25))
     plt <- plt + scale_y_continuous(breaks = round(seq(min(DB_Edges$weight), 1, by = step),1))
-    if(plotLabels) plt <- plt + geom_label(aes(label= round(weight,2)), show.legend = FALSE)
+    if(plotLabels) plt <- plt + geom_label(aes(label= round(DB_Edges$weight,2)), show.legend = FALSE)
     plt <- plt + ggtitle("Sensitivity Analysis") + xlab("Alternative") + ylab("Weight")
     plt <- plt + theme(plot.title = element_text(color="#666666", 
                                                  face="bold",
@@ -176,9 +175,7 @@ sensitivity <- function(data=c(),
 #' @description Helper function to sensitivity analysis
 #' @title default_sensitivty
 #' @author Blake Conrad \email{bmc.cs@outlook.com}
-#' @param data, data.frame in read data matrix format
-#' @param algParams, a list of parameters that the user wishes to customize during sensitivity analysis.
-#' @param DM, the original decision matrix
+#' @param DM, the original decision matrix, in read.decision.matrix format
 #' @param DB, wearhouse to store all of our iterations of data being created.
 #' @param attr, specified attribute(s) to run sensitivty on.
 #' @param algs, specified algorithms to run sensitivity on.
@@ -392,7 +389,7 @@ increaseAttribute <- function(DMCopyk,
 #' @param DMCopy, the original decision matrix
 #' @param DB, wearhouse to store all of our iterations of data being created.
 #' @param attr_i, specified attribute being examined.
-#' @param algs, specified algorithms to run sensitivity on.
+#' @param alg, specified algorithms to run sensitivity on.
 #' @param algParams, parameters to be passed around to each function in sensitivity
 #' @param verbose, echos print statements to understand input/output relation.
 #' @param iterid, the current unique identifier to this iteration.
@@ -477,8 +474,6 @@ updateDB <- function(DMCopy,
 #' @description Helper function to sensitivity analysis
 #' @title custom_sensitivty
 #' @author Blake Conrad \email{bmc.cs@outlook.com}
-#' @param data, data.frame in read data matrix format
-#' @param algParams, a list of parameters that the user wishes to customize during sensitivity analysis.
 #' @param DM, the original decision matrix
 #' @param DB, wearhouse to store all of our iterations of data being created.
 #' @param attr, specified attribute(s) to run sensitivty on.
@@ -489,7 +484,7 @@ updateDB <- function(DMCopy,
 #' @param window, specified window size vector e.g., c(0,.5) only to allow weights to change between the given window range.
 #' @param splitPercentages, a specified range of how each iteration will divey out the incrmented change to the other attributes. This can vary.
 #' @keywords data.frame, ranking
-#' @return data.frame
+#' @return list
 custom_sensitivity <- function(DM,
                                DB,
                                attr,

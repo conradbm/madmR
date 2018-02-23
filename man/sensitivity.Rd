@@ -17,8 +17,8 @@ sensitivity(data = c(), algs = c("TOPSIS", "MAUT"), algParams = c(),
 
 \item{step, }{automatically set to 0.01 is the steps you want an attribute to climb up or down.}
 
-\item{window, }{double or vector w/ 1 double per attr, specifies how low and high a step size will go for each attribute relative to its 
-current weight. if window exceeds 1 attr below0 or above1, the window for that attr will be void and the
+\item{window, }{double or vector or list, a sigle value represents how low to go for a weight on an attribute being studied, i.e weight-window. likewise for how high, weight+window. for the vector
+and list situation it is nothing more than a substitute for the lower and upper bound of default, i.e., (step, 1-step)
  next will be assessed.}
 
 \item{attr, }{automatically set to c() will trigger a full sensitivity accross all attributes.
@@ -34,13 +34,6 @@ The generalization to this is step/(1-N) in the algorithm.}
 \item{verbose, }{default to FALSE. As with most linux command line applications, this will give you a highly detailed picture of what type of iterations are taking place under the hood.}
 
 \item{plotLabels, }{boolean to specify how you would like the ggplot2 object to be returned (points or labels).}
-
-\item{splitPercentages, matrix}{of size n-1 by n-1, for each attr how to weigh every other attr from the inc/dec in step. each row should sum to 1.}
-
-\item{window, }{double or vector or list, a sigle value represents how low to go for a weight on an attribute being studied, i.e weight-window. likewise for how high, weight+window. for the vector
-and list situation it is nothing more than a substitute for the lower and upper bound of default, i.e., (step, 1-step)}
-
-\item{splitPercentages, }{currently defaulted to uniform, but will allow the user to define rules to how incremental changes are handled.}
 }
 \value{
 named list
@@ -70,7 +63,8 @@ data(topsis_dm)
 TOPSIS(maut_dm)$Results
 MAUT(maut_dm)$Results
 
-## Run Sensitivity (I.e., step defaults, algs defaults, algParams defaults, attr defaults. All of which can be tweaked.)
+## Run Sensitivity (I.e., step defaults, algs defaults, algParams defaults, attr 
+#                   defaults. All of which can be tweaked.)
 FinalDB <- sensitivity(data=maut_dm)
 FinalDB$Results          # Output from all the runs
 FinalDB$EdgeCasesResults # Show all of the cases in Final_DB$Results when rank changed

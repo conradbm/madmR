@@ -7,7 +7,11 @@
 TOPSIS(data = DM, algParams = c(), verbose = FALSE)
 }
 \arguments{
-\item{data.frame}{in read.data.matrix format}
+\item{data, }{dataframe in read.data.matrix format}
+
+\item{algParams, }{default to c(), when the sensitivity function calls this function the user can pass specific algorithm parameters. These have a sanitiy check and then append in the correct parameter if correctly supplied.}
+
+\item{verbose, }{echos print statements to understand input/output relation.}
 }
 \value{
 list
