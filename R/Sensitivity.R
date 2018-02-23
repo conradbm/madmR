@@ -157,6 +157,7 @@ sensitivity <- function(data=c(),
                                                  size=22)) 
     plt <- plt + theme(axis.title.x = element_text(face="bold"),
                        axis.title.y = element_text(face="bold"))
+    plt <- plt + + labs(fill='Rank Scoring')
   }
   else{
     cat("Sensitivity results: No change in weight will result in a change in rank between alternatives.\n")
