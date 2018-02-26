@@ -1,3 +1,4 @@
 .Rprofile
 ^README\.Rmd$
 ^LICENSE\.md$
+^._*
